@@ -33,8 +33,8 @@ jobs:
     - name: Pre-build image
       uses: devcontainers/ci@v0.3
       with:
-        imageName: butlerhat/ciclozero_prod
-        cacheFrom: butlerhat/ciclozero_prod
+        imageName: butlerhat/interpreter_prod
+        cacheFrom: butlerhat/interpreter_prod
         push: always
 
     - name: Deploy
