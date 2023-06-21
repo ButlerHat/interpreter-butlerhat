@@ -56,4 +56,6 @@ WORKDIR /tmp/pip-tmp
 RUN python resolve_conda_secret.py --token $GITHUB_TOKEN
 RUN conda env update -n base -f conda_pass.yaml
 
+WORKDIR /workspaces/interpreter-butlerhat
+
 CMD ["bash", "./.devcontainer/postCreateCommand.sh"]
