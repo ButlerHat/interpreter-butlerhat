@@ -1,0 +1,43 @@
+name: Build and deploy interpreter app
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch: # manual trigger
+
+jobs:
+  build:
+    runs-on: omen-ubuntu
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Set prod devcontainer
+      run: |
+        cp .devcontainer/prod/devcontainer.json .devcontainer/
+        cp .devcontainer/prod/docker-compose-build.yml .devcontainer/
+        cp .devcontainer/prod/docker-compose-deploy.yml .devcontainer/
+        cp .devcontainer/prod/postCreateCommand.sh .devcontainer/
+        cp .devcontainer/prod/resolve_conda_secret.py .devcontainer/
+        cp .devcontainer/prod/conda-prod.yml .
+        echo 'USER_ID=1000' >> .devcontainer/.env
+        echo 'GROUP_ID=1000' >> .devcontainer/.env
+        echo 'HOST_HOME=/home/david' >> .devcontainer/.env
+        echo 'GITHUB_TOKEN='"'"'${{ secrets.TOKEN_GITHUB }}'"'"'' >> .devcontainer/.env
+
+    - name: Log in to Docker registry
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Pre-build image
+      uses: devcontainers/ci@v0.3
+      with:
+        imageName: butlerhat/ciclozero_prod
+        cacheFrom: butlerhat/ciclozero_prod
+        push: always
+
+    - name: Deploy
+      run: |
+        docker compose -f .devcontainer/docker-compose-deploy.yml up -d
+      

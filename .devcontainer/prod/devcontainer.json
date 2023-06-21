@@ -1,0 +1,39 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/miniconda
+{
+	"name": "Interpreter Prod",
+	"dockerComposeFile": "./docker-compose-build.yml",
+	"service": "interperter_prod",
+	"workspaceFolder": "/workspaces/interpreter-butlerhat",
+
+	"features": {
+		"ghcr.io/devcontainers/features/desktop-lite:1": {},
+		"ghcr.io/devcontainers/features/node:1": {}
+	},
+
+	"shutdownAction": "none",
+
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "bash /workspaces/interpreter-butlerhat/.devcontainer/postCreateCommand.sh",
+
+	// Configure tool-specific properties.
+	"customizations":{
+		"vscode": {
+			"settings": {
+					"python.analysis.typeCheckingMode": "basic"
+			},
+			"extensions": [
+				"ms-python.python",
+				"github.copilot",
+				"robocorp.robotframework-lsp"
+			]
+		}
+	}
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+}

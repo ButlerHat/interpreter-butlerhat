@@ -1,0 +1,11 @@
+version: '3.7'
+services:
+  interperter_prod:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+      args:
+        USER_ID: ${USER_ID}
+        GROUP_ID: ${GROUP_ID}
+        GITHUB_TOKEN: ${GITHUB_TOKEN}
+      target: prod
