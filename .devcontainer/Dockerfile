@@ -49,7 +49,7 @@ ENV DBUS_SESSION_BUS_ADDRESS="autolaunch:" \
 
 USER $UNAME
 
-COPY .devcontainer/prod/conda-prod.yaml /tmp/pip-tmp/conda-prod.yml
+COPY conda-prod.yaml /tmp/pip-tmp/conda-prod.yaml
 COPY .devcontainer/resolve_conda_secret.py /tmp/pip-tmp/resolve_conda_secret.py
 
 WORKDIR /tmp/pip-tmp
