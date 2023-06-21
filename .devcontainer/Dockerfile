@@ -3,6 +3,7 @@ FROM mcr.microsoft.com/devcontainers/miniconda:0-3 AS base
 ARG UNAME=vscode
 ARG USER_ID=1000
 ARG GROUP_ID=1000
+ARG GITHUB_TOKEN
 
 USER root
 # RUN groupmod -g $GROUP_ID $UNAME
