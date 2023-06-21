@@ -18,7 +18,7 @@ jobs:
         cp .devcontainer/prod/docker-compose-deploy.yml .devcontainer/
         cp .devcontainer/prod/postCreateCommand.sh .devcontainer/
         cp .devcontainer/prod/resolve_conda_secret.py .devcontainer/
-        cp .devcontainer/prod/conda-prod.yml .
+        cp .devcontainer/prod/conda-prod.yaml .
         echo 'USER_ID=1000' >> .devcontainer/.env
         echo 'GROUP_ID=1000' >> .devcontainer/.env
         echo 'HOST_HOME=/home/david' >> .devcontainer/.env
