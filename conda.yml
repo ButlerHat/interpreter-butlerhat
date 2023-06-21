@@ -1,0 +1,14 @@
+name: base
+
+channels:
+  - defaults
+
+dependencies:
+  - python=3.10
+  - pip
+
+  - pip:
+    - git+https://github.com/robocorp/robotframework-lsp.git@master#subdirectory=robotframework-interactive/src
+    - git+https://github.com/robocorp/robotframework-lsp.git@master#subdirectory=robocorp-python-ls-core/src
+    - pytest
+    - httpx

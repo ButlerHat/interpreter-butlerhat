@@ -1,0 +1,4 @@
+browser/
+playwright-log.txt
+interactive_console_output.xml
+__pycache__/

@@ -1,0 +1,39 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/miniconda
+{
+	"name": "Interpreter Dev",
+	"dockerComposeFile": "./docker-compose.yml",
+	"service": "interpreter_dev",
+	"workspaceFolder": "/workspaces/ai-butlerhat/data-butlerhat/robotframework-butlerhat/interpreter-butlerhat",
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	"features": {
+		"ghcr.io/devcontainers/features/desktop-lite:1": {},
+		"ghcr.io/devcontainers/features/node:1": {}
+	},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// May be need to install -e /workspaces/robotframework-lsp/robotframework-interactive/src
+	"postCreateCommand": "conda init bash && pip install -e .. && rfbrowser init",
+
+	// Configure tool-specific properties.
+	"customizations":{
+		"vscode": {
+			"settings": {
+					"python.analysis.typeCheckingMode": "basic"
+			},
+			"extensions": [
+				"ms-python.python",
+				"github.copilot",
+				"github.copilot-chat",
+				"robocorp.robotframework-lsp"
+			]
+		}
+	}
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+}
