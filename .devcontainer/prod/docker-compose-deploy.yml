@@ -1,8 +1,8 @@
 version: '3.7'
 services:
   interperter_prod:
-    image: butlerhat/interperter_prod:latest
-    container_name: interperter_prod
+    image: butlerhat/interpreter_prod:latest
+    container_name: interpreter_prod
     user: vscode
     init: true
     volumes:
