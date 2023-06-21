@@ -7,7 +7,8 @@ from fastapi.testclient import TestClient  # pylint: disable=import-error, wrong
 # Add parent directory to path
 current_file_path = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(f"{current_file_path}/..")
-from app import app, Command, interpreters  # pylint: disable=import-error, wrong-import-position
+sys.path.append(f"{current_file_path}/../src")
+from src.app import app, Command, interpreters  # pylint: disable=import-error, wrong-import-position
 
 client = TestClient(app)
 
@@ -31,10 +32,12 @@ def test_evaluate():
     response = client.get("/start_interpreter")
     interpreter_id = response.json()['id']
 
-    cmd = Command(command="""*** Settings ***\nLibrary    ButlerRobot.AIBrowserLirbary  WITH NAME  Browser""")
+    cmd = Command(command="""
+    *** Settings ***\nLibrary   ButlerRobot.AIBrowserLibrary  fix_bbox=${TRUE}  presentation_mode=${True}  console=${False}  record=${True}  output_path=${OUTPUT_DIR}/crawl_amazon_data  WITH NAME  Browser
+    """)
     response = client.post(f"/evaluate/{interpreter_id}", json=cmd.dict())
     assert response.status_code == 200
-    assert response.json() == {"message": "Command executed successfully."}
+    assert response.json().get("success", False), response.json().get("message", "No error message provided")
 
     response = client.post("/evaluate/non_existent_id", json=cmd.dict())
     assert response.status_code == 404

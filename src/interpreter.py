@@ -12,10 +12,6 @@ from robotframework_interactive.interpreter import RobotFrameworkInterpreter
 from robotframework_interactive.server.rf_interpreter_ls_config import (
         RfInterpreterRobotConfig,
     )
-from robotframework_interactive.protocols import (
-    ActionResultDict
-)
-
 
 USE_TIMEOUTS = True
 if "GITHUB_WORKFLOW" not in os.environ:

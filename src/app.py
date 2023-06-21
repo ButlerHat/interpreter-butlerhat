@@ -3,7 +3,6 @@ API for interpeter.
 """
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel  # pylint: disable=no-name-in-module
-from robotframework_interactive.protocols import ActionResultDict
 from interpreter import InterpreterManager
 # Import your interpreter and other required modules here
 
@@ -20,7 +19,7 @@ class Command(BaseModel):
 @app.get("/start_interpreter")
 async def start_interpreter():
     """
-    Start the interpreter.
+    Start the RobotFramework interpreter.
     """
     # ... create and start your interpreter here ...
     interpreter_id = interpreters.start_interpreter()
