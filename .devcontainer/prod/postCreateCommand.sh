@@ -20,7 +20,7 @@ if [ ! -f ~/.cloudflared/cert.pem ]; then
 fi
 
 # Start the tunnel
-cloudflared tunnel run --config $HOME/.cloudflared/config_interpreter.yml interpreter_bridge &
+cloudflared tunnel --config $HOME/.cloudflared/config_interpreter.yml run interpreter_bridge &
 
 # Start interpreter server. The port is fixed to 8000 due to cloudflare tunnel
 cd src
