@@ -3,6 +3,7 @@ API for interpeter.
 """
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel  # pylint: disable=no-name-in-module
+from fastapi.middleware.cors import CORSMiddleware
 from interpreter import InterpreterManager
 # Import your interpreter and other required modules here
 
