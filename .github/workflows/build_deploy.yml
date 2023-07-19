@@ -22,7 +22,7 @@ jobs:
         echo 'USER_ID=1000' >> .devcontainer/.env
         echo 'GROUP_ID=1000' >> .devcontainer/.env
         echo 'HOST_HOME=/home/david' >> .devcontainer/.env
-        echo 'HF_TOKEN='"'"'${{ secrets.HF_TOKEN }}'"'"'' >> docker/.env
+        echo 'HF_TOKEN='"'"'${{ secrets.HF_TOKEN }}'"'"'' >> .devcontainer/.env
         echo 'GITHUB_TOKEN='"'"'${{ secrets.TOKEN_GITHUB }}'"'"'' >> .devcontainer/.env
 
     - name: Log in to Docker registry
