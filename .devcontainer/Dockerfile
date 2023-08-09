@@ -54,6 +54,7 @@ ENV DBUS_SESSION_BUS_ADDRESS="autolaunch:" \
 
 USER $UNAME
 
+# Conda prod is moved to root by github action
 COPY conda-prod.yaml /tmp/pip-tmp/conda-prod.yaml
 COPY .devcontainer/resolve_conda_secret.py /tmp/pip-tmp/resolve_conda_secret.py
 
