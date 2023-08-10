@@ -8,7 +8,7 @@ dependencies:
   - pip
 
   - pip:
-    - git+https://{GITHUB_ACCESS_TOKEN}@github.com/ButlerHat/robotframework-dist-butlerhat.git
+    - git+https://{GITHUB_ACCESS_TOKEN}@github.com/ButlerHat/robotframework-dist-butlerhat.git#egg=robotframework-butlerhat[full]
     - git+https://github.com/robocorp/robotframework-lsp.git@master#subdirectory=robotframework-interactive/src
     - git+https://github.com/robocorp/robotframework-lsp.git@master#subdirectory=robocorp-python-ls-core/src
     - pytest
