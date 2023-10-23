@@ -17,10 +17,10 @@ jobs:
         
         echo 'USER_ID=1000' >> .devcontainer/.env
         echo 'GROUP_ID=1000' >> .devcontainer/.env
-        echo 'PYPI_USER='"'"'${{ secrets.PYPI_USER }}'"'"'' >> .devcontainer/prod_gpt4/.env
-        echo 'PYPI_PASS='"'"'${{ secrets.PYPI_PASS }}'"'"'' >> .devcontainer/prod_gpt4/.env
-        echo 'TUNNEL_TOKEN='"'"'${{ secrets.TUNNEL_TOKEN }}'"'"'' >> .devcontainer/prod_gpt4/.env
-        echo 'TUNNEL_TOKEN_VNC='"'"'${{ secrets.TUNNEL_TOKEN_VNC }}'"'"'' >> .devcontainer/prod_gpt4/.env
+        echo 'PYPI_USER='"'"'${{ secrets.PYPI_USER }}'"'"'' >> .devcontainer/prod/.env
+        echo 'PYPI_PASS='"'"'${{ secrets.PYPI_PASS }}'"'"'' >> .devcontainer/prod/.env
+        echo 'TUNNEL_TOKEN='"'"'${{ secrets.TUNNEL_TOKEN }}'"'"'' >> .devcontainer/prod/.env
+        echo 'TUNNEL_TOKEN_VNC='"'"'${{ secrets.TUNNEL_TOKEN_VNC }}'"'"'' >> .devcontainer/prod/.env
 
     - name: Log in to Docker registry
       uses: docker/login-action@v1
