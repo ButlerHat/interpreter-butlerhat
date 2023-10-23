@@ -17,7 +17,7 @@
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// May be need to install -e /workspaces/robotframework-lsp/robotframework-interactive/src
-	"postCreateCommand": "conda init bash && . ~/.bashrc && pip install -e .. && rfbrowser init",
+	"postCreateCommand": "pip install -e ..[browser_stealth] && /opt/conda/envs/robotframework/bin/python -m Browser.entry init",
 
 	// Configure tool-specific properties.
 	"customizations":{

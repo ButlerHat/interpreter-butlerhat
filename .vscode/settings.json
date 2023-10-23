@@ -1,9 +1,16 @@
 {
     "python.analysis.typeCheckingMode": "basic",
-    "robot.language-server.python": "/opt/conda/bin/python",
+    "robot.language-server.python": "/opt/conda/envs/robotframework/bin/python",
+    "python.defaultInterpreterPath": "/opt/conda/envs/robotframework/bin/python",
+    
     "python.testing.pytestArgs": [
         "tests"
     ],
     "python.testing.unittestEnabled": false,
-    "python.testing.pytestEnabled": true
+    "python.testing.pytestEnabled": true,
+    "python.analysis.autoImportCompletions": true,
+    "pylint.importStrategy": "fromEnvironment",
+    "pylint.path": [
+        "/opt/conda/envs/robotframework/bin/pylint"
+    ]
 }

@@ -1,4 +1,4 @@
-name: base
+name: robotframework
 
 channels:
   - defaults
@@ -8,7 +8,9 @@ dependencies:
   - pip
 
   - pip:
-    - git+https://github.com/robocorp/robotframework-lsp.git@master#subdirectory=robotframework-interactive/src
-    - git+https://github.com/robocorp/robotframework-lsp.git@master#subdirectory=robocorp-python-ls-core/src
+    - git+https://github.com/robocorp/robotframework-lsp.git@release-robotframework-lsp#subdirectory=robotframework-interactive/src
+    - git+https://github.com/robocorp/robotframework-lsp.git@release-robotframework-lsp#subdirectory=robocorp-python-ls-core/src
     - pytest
     - httpx
+    - python-multipart
+    - typing_extensions

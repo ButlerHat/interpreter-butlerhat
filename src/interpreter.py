@@ -6,6 +6,7 @@ import sys
 import uuid
 import threading
 import tempfile
+from io import StringIO
 from dataclasses import dataclass
 from typing import Dict, IO, cast
 from robotframework_interactive.interpreter import RobotFrameworkInterpreter
@@ -21,8 +22,8 @@ if "GITHUB_WORKFLOW" not in os.environ:
 @dataclass
 class _InterpreterInfo:
     interpreter: RobotFrameworkInterpreter
-    stream_stdout: IO[str]
-    stream_stderr: IO[str]
+    stream_stdout: StringIO
+    stream_stderr: StringIO
     finish_main_loop_event: threading.Event
     finished_main_loop_event: threading.Event
 
@@ -32,27 +33,41 @@ class InterpreterManager:
     Class for managing interpreters.
     """
 
-    def __init__(self):
+    def __init__(self, max_interpreters: int = -1):
         self.interpreters: Dict[str, _InterpreterInfo] = {}
+        self.max_interpreters = max_interpreters
 
     def __contains__(self, interpreter_id: str) -> bool:
         return interpreter_id in self.interpreters.keys()
+    
+    def get_info(self, interpreter_id: str) -> _InterpreterInfo:
+        return self.interpreters[interpreter_id]
+    
+    def set_max_interpreters(self, max_interpreters: int):
+        self.max_interpreters = max_interpreters
 
     def start_interpreter(self) -> str:
         """
         Start the interpreter and return interpreter id.
         """
+        if self.max_interpreters > 0 and len(self.interpreters) >= self.max_interpreters:
+            raise ValueError("Maximum number of interpreters reached")
+        
         interpreter = RobotFrameworkInterpreter(RfInterpreterRobotConfig())  # type: ignore
 
         # Create temporary files for stdout and stderr
-        stream_stdout: IO[str] = tempfile.TemporaryFile("w+")
-        stream_stderr: IO[str] = tempfile.TemporaryFile("w+")
+        stream_stdout: IO[str] = StringIO()
+        stream_stderr: IO[str] = StringIO()
 
         def on_stdout(msg: str):
+            print("Stdout: " + msg)
             stream_stdout.write(msg)
+            stream_stdout.flush()
 
         def on_stderr(msg: str):
+            print("Stderr: " + msg)
             stream_stderr.write(msg)
+            stream_stderr.flush()
 
         interpreter.on_stdout.register(on_stdout)
         interpreter.on_stderr.register(on_stderr)
@@ -96,6 +111,7 @@ class InterpreterManager:
 
         interpreter_info = self.interpreters[interpreter_id]
         result_dict: dict = cast(dict, interpreter_info.interpreter.evaluate(command))
+        result_dict["stdout"] = interpreter_info.stream_stdout.getvalue()
         return result_dict
             
 
