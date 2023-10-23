@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sudo chown -R 1000:1000 /tmp/cookies
+
 # Init VNC
 /usr/local/share/desktop-init.sh
 xrandr -s 1920x1080

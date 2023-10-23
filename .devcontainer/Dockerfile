@@ -41,8 +41,6 @@ WORKDIR /workspaces/ai-butlerhat/data-butlerhat/robotframework-butlerhat/interpr
 USER $UNAME
 
 COPY conda.yaml ./conda.yaml
-COPY .devcontainer/robocorp-python-ls-core-0.0.0.tar.gz .devcontainer/robocorp-python-ls-core-0.0.0.tar.gz
-COPY .devcontainer/robotframework-interactive-0.0.1.tar.gz .devcontainer/robotframework-interactive-0.0.1.tar.gz
 RUN umask 0002 && conda env create -n robotframework -f ./conda.yaml
 RUN conda init bash
 RUN echo "conda activate robotframework" >> ~/.bashrc
@@ -65,7 +63,9 @@ ENV DBUS_SESSION_BUS_ADDRESS="autolaunch:" \
 # Install cloudflared
 USER root
 
-RUN mkdir -p /workspaces/ai-butlerhat/data-butlerhat/robotframework-butlerhat/interpreter-butlerhat/.devcontainer/prod_gpt4 && chown -R $UNAME:$UNAME /workspaces
+RUN mkdir -p /workspaces/ai-butlerhat/data-butlerhat/robotframework-butlerhat/interpreter-butlerhat/.devcontainer/prod_gpt4
+RUN mkdir -p /workspaces/ai-butlerhat/data-butlerhat/robotframework-butlerhat/interpreter-butlerhat/.devcontainer/prod
+RUN chown -R $UNAME:$UNAME /workspaces
 WORKDIR /workspaces/ai-butlerhat/data-butlerhat/robotframework-butlerhat/interpreter-butlerhat
 
 USER $UNAME
@@ -93,6 +93,10 @@ CMD ["bash", "./.devcontainer/prod/postCreateCommand.sh"]
 
 
 FROM pre_prod AS prod_gpt4
+
+USER root
+RUN mkdir -p /tmp/cookies
+RUN chown -R $UNAME:$UNAME /tmp/cookies
 
 # Install conda env
 COPY .devcontainer/prod_gpt4/conda.yaml .devcontainer/prod_gpt4/conda.yaml
