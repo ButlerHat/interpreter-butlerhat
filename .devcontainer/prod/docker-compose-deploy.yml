@@ -34,21 +34,21 @@ services:
       - --token
       - ${TUNNEL_TOKEN}
 
-  # interperter_prod_tunnel_vnc:
-  #   image: cloudflare/cloudflared:latest
-  #   container_name: interperter_prod_tunnel_vnc
-  #   networks:
-  #     - external
-  #   depends_on:
-  #     interperter_prod:
-  #       condition: service_healthy
-  #   restart: unless-stopped
-  #   command:
-  #     - tunnel
-  #     - --no-autoupdate
-  #     - run
-  #     - --token
-  #     - ${TUNNEL_TOKEN_VNC}
+  interperter_prod_tunnel_vnc:
+    image: cloudflare/cloudflared:latest
+    container_name: interperter_prod_tunnel_vnc
+    networks:
+      - external
+    depends_on:
+      interperter_prod:
+        condition: service_healthy
+    restart: unless-stopped
+    command:
+      - tunnel
+      - --no-autoupdate
+      - run
+      - --token
+      - ${TUNNEL_TOKEN_VNC}
 
 networks:
   external:
