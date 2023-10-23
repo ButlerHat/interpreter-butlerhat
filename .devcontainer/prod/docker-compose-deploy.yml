@@ -14,9 +14,9 @@ services:
     command: bash .devcontainer/prod/postCreateCommand.sh
     healthcheck:
       test: ["CMD", "wget", "http://localhost:8000/health"]
-      interval: 5s
+      interval: 1m
       timeout: 1m
-      retries: 12
+      retries: 3
 
   interperter_prod_tunnel:
     image: cloudflare/cloudflared:latest
@@ -34,21 +34,21 @@ services:
       - --token
       - ${TUNNEL_TOKEN}
 
-  interperter_prod_tunnel_vnc:
-    image: cloudflare/cloudflared:latest
-    container_name: interperter_prod_tunnel_vnc
-    networks:
-      - external
-    depends_on:
-      interperter_prod:
-        condition: service_healthy
-    restart: unless-stopped
-    command:
-      - tunnel
-      - --no-autoupdate
-      - run
-      - --token
-      - ${TUNNEL_TOKEN_VNC}
+  # interperter_prod_tunnel_vnc:
+  #   image: cloudflare/cloudflared:latest
+  #   container_name: interperter_prod_tunnel_vnc
+  #   networks:
+  #     - external
+  #   depends_on:
+  #     interperter_prod:
+  #       condition: service_healthy
+  #   restart: unless-stopped
+  #   command:
+  #     - tunnel
+  #     - --no-autoupdate
+  #     - run
+  #     - --token
+  #     - ${TUNNEL_TOKEN_VNC}
 
 networks:
   external:

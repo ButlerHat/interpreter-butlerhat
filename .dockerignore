@@ -1,0 +1,9 @@
+browser/
+playwright-log.txt
+interactive_console_output.xml
+__pycache__/
+desktop/
+.env
+cookies.json
+images/
+.git
