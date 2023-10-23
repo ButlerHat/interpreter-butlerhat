@@ -65,6 +65,12 @@ app.add_middleware(
     allow_headers=["*"],  # Allows all headers
 )
 
+@app.get("/health")
+async def health():
+    """
+    Health check
+    """
+    return "OK"
 
 @app.post("/start_browser_cookies/")
 async def start_browser_cookies(cookie_file: UploadFile = File(...)):
@@ -163,4 +169,5 @@ async def stop_interpreter():
 if __name__ == "__main__":
     import uvicorn
     setup()
+    logger.console("Starting interpreter API server on http://localhost:8000")
     uvicorn.run(app, host="0.0.0.0", log_level="info")   # type: ignore

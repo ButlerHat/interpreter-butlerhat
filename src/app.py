@@ -26,6 +26,13 @@ class Command(BaseModel):
     """
     command: str
 
+@app.get("/health")
+async def health():
+    """
+    Health check
+    """
+    return "OK"
+
 @app.get("/start_interpreter")
 async def start_interpreter():
     """

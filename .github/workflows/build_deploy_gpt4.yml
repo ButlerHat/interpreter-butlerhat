@@ -13,14 +13,14 @@ jobs:
 
     - name: Set prod devcontainer
       run: |
-        cp .devcontainer/prod/devcontainer.json .devcontainer/
-        
-        echo 'USER_ID=1000' >> .devcontainer/.env
-        echo 'GROUP_ID=1000' >> .devcontainer/.env
+        cp .devcontainer/prod_gpt4/devcontainer.json .devcontainer/
+
+        echo 'USER_ID=1000' >> .devcontainer/prod_gpt4/.env
+        echo 'GROUP_ID=1000' >> .devcontainer/prod_gpt4/.env
         echo 'PYPI_USER='"'"'${{ secrets.PYPI_USER }}'"'"'' >> .devcontainer/prod_gpt4/.env
         echo 'PYPI_PASS='"'"'${{ secrets.PYPI_PASS }}'"'"'' >> .devcontainer/prod_gpt4/.env
-        echo 'TUNNEL_TOKEN='"'"'${{ secrets.TUNNEL_TOKEN }}'"'"'' >> .devcontainer/prod_gpt4/.env
-        echo 'TUNNEL_TOKEN_VNC='"'"'${{ secrets.TUNNEL_TOKEN_VNC }}'"'"'' >> .devcontainer/prod_gpt4/.env
+        echo 'TUNNEL_TOKEN='"'"'${{ secrets.TUNNEL_TOKEN_GPT4 }}'"'"'' >> .devcontainer/prod_gpt4/.env
+        echo 'TUNNEL_TOKEN_VNC='"'"'${{ secrets.TUNNEL_TOKEN_VNC_GPT4 }}'"'"'' >> .devcontainer/prod_gpt4/.env
 
     - name: Log in to Docker registry
       uses: docker/login-action@v1
@@ -31,11 +31,11 @@ jobs:
     - name: Pre-build image
       uses: devcontainers/ci@v0.3
       with:
-        imageName: butlerhat/interpreter_prod
-        cacheFrom: butlerhat/interpreter_prod
+        imageName: butlerhat/gpt4api_prod
+        cacheFrom: butlerhat/gpt4api_prod
         push: always
 
     - name: Deploy
       run: |
-        docker compose -f .devcontainer/prod/docker-compose-deploy.yml up -d
+        docker compose -f .devcontainer/prod_gpt4/docker-compose-deploy.yml up -d
       

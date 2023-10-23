@@ -1,30 +1,32 @@
 version: '3.7'
 services:
-  interperter_prod:
-    image: butlerhat/interpreter_prod:latest
-    container_name: interpreter_prod
+  gpt4api_prod:
+    image: butlerhat/gpt4api_prod:latest
+    container_name: gpt4api_prod
     user: vscode
-    restart: unless-stopped
     init: true
+    restart: unless-stopped
     cap_add:
       - SYS_ADMIN
     shm_size: '2gb'
     networks:
       - external
-    command: bash .devcontainer/prod/postCreateCommand.sh
+    command: bash .devcontainer/prod_gpt4/postCreateCommand.sh
+    volumes:
+      - gpt4_cookies:/tmp/cookies
     healthcheck:
       test: ["CMD", "wget", "http://localhost:8000/health"]
       interval: 5s
       timeout: 1m
       retries: 12
 
-  interperter_prod_tunnel:
+  gpt4api_prod_tunnel:
     image: cloudflare/cloudflared:latest
-    container_name: interperter_prod_tunnel
+    container_name: gpt4api_prod_tunnel
     networks:
       - external
     depends_on:
-      interperter_prod:
+      gpt4api_prod:
         condition: service_healthy
     restart: unless-stopped
     command:
@@ -34,13 +36,13 @@ services:
       - --token
       - ${TUNNEL_TOKEN}
 
-  interperter_prod_tunnel_vnc:
+  gpt4api_prod_tunnel_vnc:
     image: cloudflare/cloudflared:latest
-    container_name: interperter_prod_tunnel_vnc
+    container_name: gpt4api_prod_tunnel_vnc
     networks:
       - external
     depends_on:
-      interperter_prod:
+      gpt4api_prod:
         condition: service_healthy
     restart: unless-stopped
     command:
@@ -50,6 +52,9 @@ services:
       - --token
       - ${TUNNEL_TOKEN_VNC}
 
+volumes:
+  gpt4_cookies:
+  
 networks:
   external:
     name: net_robot

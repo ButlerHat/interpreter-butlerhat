@@ -12,7 +12,7 @@ dependencies:
   - pip:
     - git+https://github.com/robocorp/robotframework-lsp.git@release-robotframework-lsp#subdirectory=robotframework-interactive/src
     - git+https://github.com/robocorp/robotframework-lsp.git@release-robotframework-lsp#subdirectory=robocorp-python-ls-core/src
-    - pytest
+    - robotframework-butlerhat[browser_stealth]
     - httpx
     - python-multipart
     - typing_extensions

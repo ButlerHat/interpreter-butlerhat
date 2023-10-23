@@ -1,7 +1,7 @@
 version: '3.7'
 services:
-  interperter_prod:
-    image: butlerhat/interpreter_prod
+  gpt4api_prod:
+    image: butlerhat/gpt4api_prod
     build:
       context: ../..
       dockerfile: .devcontainer/Dockerfile
@@ -10,4 +10,4 @@ services:
         GROUP_ID: ${GROUP_ID}
         PYPI_USER: ${PYPI_USER}
         PYPI_PASS: ${PYPI_PASS}
-      target: prod
+      target: prod_gpt4

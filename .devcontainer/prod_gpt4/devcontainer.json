@@ -1,13 +1,13 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/miniconda
 {
-	"name": "Interpreter Prod",
-	"dockerComposeFile": "./prod/docker-compose-build.yml",
-	"service": "interperter_prod",
+	"name": "GPT-4V Prod",
+	"dockerComposeFile": "./prod_gpt4/docker-compose-build.yml",
+	"service": "gpt4api_prod",
 	"workspaceFolder": "/workspaces/ai-butlerhat/data-butlerhat/robotframework-butlerhat/interpreter-butlerhat",
 
 	"features": {
-		"ghcr.io/devcontainers/features/desktop-lite:1": {}
+		"ghcr.io/devcontainers/features/desktop-lite:1": {}	
 	},
 
 	"shutdownAction": "none",
@@ -16,7 +16,7 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "bash /workspaces/ai-butlerhat/data-butlerhat/robotframework-butlerhat/interpreter-butlerhat/.devcontainer/prod/postCreateCommand.sh"
+	"postCreateCommand": "bash /workspaces/ai-butlerhat/data-butlerhat/robotframework-butlerhat/interpreter-butlerhat/.devcontainer/prod_gpt4/postCreateCommand.sh"
 
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
 	// "remoteUser": "root"

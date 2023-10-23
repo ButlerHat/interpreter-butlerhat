@@ -1,15 +1,16 @@
-name: base
+name: robotframework
 
 channels:
   - defaults
+  - conda-forge
 
 dependencies:
   - python=3.10
+  - nodejs=16.14.2
   - pip
 
   - pip:
-    - robotframework-dist-butlerhat[full] @ git+https://{GITHUB_ACCESS_TOKEN}@github.com/ButlerHat/robotframework-dist-butlerhat.git
+    - robotframework-butlerhat[full]
     - git+https://github.com/robocorp/robotframework-lsp.git@master#subdirectory=robotframework-interactive/src
     - git+https://github.com/robocorp/robotframework-lsp.git@master#subdirectory=robocorp-python-ls-core/src
-    - pytest
     - httpx

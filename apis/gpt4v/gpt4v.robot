@@ -39,7 +39,7 @@ Create Chat with cookies
         Browser.New Stealth Persistent Context   userDataDir=${COOKIES_DIR}   browser=chromium  url=https://chat.openai.com/
     END
 
-    Wait Until Network Is Idle  timeout=30s
+    Wait Until Network Is Idle  timeout=10s
     Run Keyword And Ignore Error  Accept popup
     Create new chat
 
